@@ -26,6 +26,8 @@
           pkgs.ghostscript
           pkgs.libtiff
           pkgs.wireguard-tools
+          pkgs.wstunnel
+          pkgs.tor
         ];
         shellHook = ''
           export AST_MODDIR=$(dirname $(dirname $(command -v asterisk)))/lib/asterisk/modules
@@ -51,9 +53,9 @@
               pkgs.wireguard-tools
               pkgs.ghostscript
               pkgs.libtiff
+              pkgs.wstunnel
+              pkgs.tor
             ];
-            # bring the tunnel to the hub up at boot from the shared lab dir
-            # (keys stay in lab/wg/, gitignored, out of the nix store)
             networking.wg-quick.interfaces.wg0.configFile = "/mnt/faxproj/lab/wg/vm/wg0.conf";
             systemd.services.wg-quick-wg0.unitConfig.RequiresMountsFor = "/mnt/faxproj";
             virtualisation.vmVariant.virtualisation = {
