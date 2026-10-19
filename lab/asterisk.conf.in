@@ -1,0 +1,16 @@
+[directories]
+astetcdir => @LAB@/etc
+astmoddir => @MOD@
+astvarlibdir => @LAB@/var/lib
+astdbdir => @LAB@/var/lib
+astkeydir => @LAB@/var/lib
+astdatadir => @LAB@/var/lib
+astagidir => @LAB@/var/lib/agi-bin
+astspooldir => @LAB@/var/spool
+astrundir => @LAB@/var/run
+astlogdir => @LAB@/var/log
+astsbindir => @SBIN@
+
+[options]
+verbose = 3
+debug = 0
