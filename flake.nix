@@ -31,5 +31,36 @@
           echo "asterisk-fax ready $AST_MODDIR"
         '';
       };
+      nixosConfigurations.labvm = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          ({ pkgs, ... }: {
+            system.stateVersion = "25.11";
+            networking.hostName = "labvm";
+            networking.firewall.enable = false;
+            users.users.lab = {
+              isNormalUser = true;
+              extraGroups = [ "wheel" ];
+              password = "lab";
+            };
+            security.sudo.wheelNeedsPassword = false;
+            services.getty.autologinUser = "lab";
+            environment.systemPackages = [
+              asterisk-fax
+              pkgs.wireguard-tools
+              pkgs.ghostscript
+              pkgs.libtiff
+            ];
+            virtualisation.vmVariant.virtualisation = {
+              graphics = false;
+              memorySize = 2048;
+              sharedDirectories.faxProj = {
+                source = "$HOME/src/faxproj";
+                target = "/mnt/faxproj";
+              };
+            };
+          })
+        ];
+      };
     };
 }
