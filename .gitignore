@@ -5,3 +5,7 @@ result
 lab/wg/
 lab/wg/
 lab/tor/hub
+# never commit key material, wherever it ends up
+*.key
+hs_ed25519_secret_key
+lab/tor/
